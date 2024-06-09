@@ -1,0 +1,40 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <div class="row justify-content-center mt-5">
+        <div class="text-center">
+            <h1>Создание задачи</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="content">
+                    <div class="form-group">
+                        <label for="title" class = text-primary>Название (обязательно)</label>
+                        <input type="text" name="title" class="form-control" id="title" value="{{ todo.title }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memo" class = text-primary>Описание</label>
+                        <textarea name="memo" rows="5" class="form-control" id="memo" >{{ todo.memo }}</textarea>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" name="important" class="form-check-input" id="important" {% if todo.important %}checked{% endif %}>
+                        <label class="form-check-label text-primary" for="important">Отметить важной</label>
+                    </div>
+                    <button class="btn btn-primary btn-lg" type="submit">Создать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
